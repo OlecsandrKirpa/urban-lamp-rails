@@ -1,0 +1,4 @@
+download_videos:
+  cron: "/5 * * * *"
+  class: FindVideosToDownloadJob
+  queue: default

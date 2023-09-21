@@ -1,0 +1,72 @@
+default: &default
+  name: AppName
+  admin_name: AdminName
+  admin_email: admin@email.net
+  user_block_ttl: 600
+  base_url: "http://localhost:3000"
+  frontend_base_url: "http://localhost:4203/#/"
+  project_page_url: "{{frontend_base_url}}/admin/quotations/{{quotation_id}}/projects/{{project_id}}"
+  mail_attachment_max_size: 25 MB
+
+  # ---------------------------------------------------------
+  # SMTP CONFIGURATIONS
+  # ---------------------------------------------------------
+  # You can set SMTP configurations for email delivery here.
+  #
+  # address:              | Specify the host (hostname or IP) of mail server
+  #                       | to which mail client have to connect to deliver emails.
+  # port:                 | SMTP port number on mail server.
+  # domain:               | Domain name for which we're going to deliver emails. Usually it
+  #                       | matches the last part of email address (admin@example.com -> example.com).
+  # enable_starttls_auto: | Enable automatic STARTTLS configuration detection and automatic protocol switch.
+  # openssl_verify_mode:  | Specify server SSL certificate verification mode ('none' to disable).
+  # authentication:       | Specify the type of SMTP authentication to use (set to null when disabled)
+  # user_name:            | Username to use for SMTP authentication (used when authentication is specified)
+  # password:             | The password of SMTP user
+  #
+  # Example:
+  #
+  # smtp:
+  #   address: mail.example.com
+  #   port: 587
+  #   domain: example.com
+  #   enable_starttls_auto: true
+  #   openssl_verify_mode: none
+  #   authentication: plain
+  #   user_name: user@example.com
+  #   password: mysecret
+  #   open_timeout: 60
+  #   read_timeout: 60
+
+  # Email addresses where to send final email (when projects are closed)
+  emails:
+    default_from: no-reply@example.com
+    default_reply_to: no-reply@example.com
+
+  exceptions:
+    enabled: false
+    subject_prefix: "Urban lamp"
+    sender: '"Exception" <kirpachov.com@gmail.com>'
+    recipients:
+      - "kirpachov.com@gmail.com"
+
+  developers_emails:
+   - oleksandr.kirpachov@gmail.com
+
+  send_developers_emails: true
+
+  smtp: null
+  origins:
+    - localhost
+
+  max_download_attempts: 3
+
+development:
+  <<: *default
+
+# NOTE: changing test configurations may cause errors when running tests.
+test:
+  <<: *default
+
+production:
+  <<: *default
