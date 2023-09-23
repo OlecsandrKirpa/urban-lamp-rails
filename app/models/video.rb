@@ -2,8 +2,6 @@
 
 class Video < ApplicationRecord
   validates :download_jid, uniqueness: { allow_nil: true, case_sensitive: false }
-  # validates :downloader, presence: false
-  # validates :downloader_args, presence: true
 
   validates_uniqueness_of :url, scope: :playlist_id, allow_nil: true
 
@@ -27,8 +25,15 @@ class Video < ApplicationRecord
     update(download_jid: DownloadVideoJob.perform_async(id))
   end
 
-  def download
-    puts '#download'
+  # params:
+  #  async: DownloadVideoJob instance || nil
+  def download(params = {})
+    DownloadVideo.run(params.merge(video: self))
+  end
+
+  def default_downloader
+    puts "TODO: #{self.class}##{__method__} should return a downloader based on the video url." unless Rails.env.test?
+    'VideoDownloader'
   end
 
   private

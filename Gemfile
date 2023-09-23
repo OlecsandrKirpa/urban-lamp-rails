@@ -14,6 +14,8 @@ gem "puma", "~> 5.0"
 
 gem 'active_interaction', '~> 5.2.0'
 
+gem 'text-table', '~> 1.2.4'
+
 gem 'redis', '~> 4.3.1'
 
 gem 'redis-namespace', '~> 1.8.2'
